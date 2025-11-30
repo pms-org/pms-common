@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -39,9 +40,10 @@ public class SimulatedTradeDto {
     private String side;
 
     /**
-     * Price per stock
+     * Price per stock - using BigDecimal for financial precision
+     * Precision: 19 digits, Scale: 4 decimal places
      */
-    private Double pricePerStock;
+    private BigDecimal pricePerStock;
 
     /**
      * Quantity of shares

@@ -8,7 +8,7 @@
     <parent>
         <groupId>com.pms</groupId>
         <artifactId>pms-common</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.2</version>
     </parent>
 
     <artifactId>pms-common-validation</artifactId>
