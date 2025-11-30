@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package pms.ingestion;
+
+option java_package = "com.pms.proto.ingestion";
+option java_outer_classname = "IngestionProto";
+
+import "google/protobuf/timestamp.proto";
+
+// Trade Audit Status
+enum TradeAuditStatus {
+  RECEIVED = 0;
+  VALID = 1;
+  INVALID = 2;
+  PROCESSED = 3;
+}
+
+// Trade Audit Log message
+message TradeAuditLog {
+  string id = 1;  // UUID as string
+  string x_ref = 2;  // External trade ID
+  string portfolio_id = 3;
+  string symbol = 4;
+  string side = 5;
+  int64 qty = 6;
+  string price = 7;  // BigDecimal as string
+  string raw_payload = 8;  // JSON as string
+  google.protobuf.Timestamp ingest_timestamp = 9;
+  TradeAuditStatus status = 10;
+  string error_message = 11;
+}
+
+// Outbox Event message
+message OutboxEvent {
+  string event_id = 1;  // UUID as string
+  string aggregate_id = 2;
+  string event_type = 3;
+  bytes payload_bytes = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp processed_at = 6;
+}
+
+// Ingestion envelope with metadata
+message IngestionEnvelope {
+  TradeAuditLog audit_log = 1;
+  string trace_id = 2;
+  google.protobuf.Timestamp event_timestamp = 3;
+}

@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package pms.validation;
+
+option java_package = "com.pms.proto.validation";
+option java_outer_classname = "ValidationProto";
+
+import "google/protobuf/timestamp.proto";
+
+// Sector enumeration
+enum Sector {
+  TECHNOLOGY = 0;
+  HEALTHCARE = 1;
+  FINANCE = 2;
+  ENERGY = 3;
+  CONSUMER_DISCRETIONARY = 4;
+  CONSUMER_STAPLES = 5;
+  INDUSTRIALS = 6;
+  MATERIALS = 7;
+  UTILITIES = 8;
+  REAL_ESTATE = 9;
+  TELECOMMUNICATION = 10;
+  OTHER = 11;
+}
+
+// Trade Side (replicated from core)
+enum TradeSide {
+  BUY = 0;
+  SELL = 1;
+}
+
+// Stock message
+message Stock {
+  int64 stock_id = 1;
+  string symbol = 2;
+  Sector sector_name = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+// Validation Outbox message
+message ValidationOutbox {
+  int64 validation_outbox_id = 1;
+  string trade_id = 2;  // UUID as string
+  string portfolio_id = 3;  // UUID as string
+  string symbol = 4;
+  TradeSide side = 5;
+  string price_per_stock = 6;  // BigDecimal as string
+  int64 quantity = 7;
+  google.protobuf.Timestamp timestamp = 8;
+  string status = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp updated_at = 11;
+}
+
+// Validation envelope with metadata
+message ValidationEnvelope {
+  ValidationOutbox validation_outbox = 1;
+  string trace_id = 2;
+  google.protobuf.Timestamp event_timestamp = 3;
+}

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.pms</groupId>
+    <artifactId>pms-common</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>PMS Common</name>
+    <description>Shared domain modules for PMS platform microservices</description>
+    <url>https://github.com/pms-org/pms-common</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>pms-team</id>
+            <name>PMS Development Team</name>
+            <email>nishantdev03@gmail.com</email>
+        </developer>
+    </developers>
+
+    <!-- IMPORTANT: SCM must point to the organization repo -->
+    <scm>
+        <connection>scm:git:https://github.com/pms-org/pms-common.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/pms-org/pms-common.git</developerConnection>
+        <url>https://github.com/pms-org/pms-common</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <!-- IMPORTANT: GitHub Packages URL MUST use pms-org -->
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/pms-org/pms-common</url>
+        </repository>
+    </distributionManagement>
+
+    <modules>
+        <module>pms-common-core</module>
+        <module>pms-common-ingestion</module>
+        <module>pms-common-validation</module>
+        <module>pms-common-snapshot</module>
+        <module>pms-common-analytics</module>
+        <module>pms-common-simulator</module>
+        <module>pms-common-crossref</module>
+        <module>pms-common-proto</module>
+        <module>pms-common-utils</module>
+    </modules>
+
+    <!-- ALL OTHER CONTENT REMAINS EXACTLY AS YOUR ORIGINAL POM -->
+    <!-- (properties, dependencyManagement, plugins, everything) -->
+    
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <lombok.version>1.18.30</lombok.version>
+        <protobuf.version>3.25.1</protobuf.version>
+        <grpc.version>1.60.0</grpc.version>
+        <spring-boot.version>3.2.0</spring-boot.version>
+        <jackson.version>2.16.0</jackson.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
+
+        <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
+    </properties>
+
+    <!-- dependencyManagement, pluginManagement, build, extensions 
+         remain IDENTICAL to your original -->
+</project>

@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package pms.analytics;
+
+option java_package = "com.pms.proto.analytics";
+option java_outer_classname = "AnalyticsProto";
+
+import "google/protobuf/timestamp.proto";
+
+// Trade Side
+enum TradeSide {
+  BUY = 0;
+  SELL = 1;
+}
+
+// PnL message
+message Pnl {
+  string transaction_id = 1;  // UUID as string
+  string portfolio_id = 2;  // UUID as string
+  string symbol = 3;
+  TradeSide side = 4;
+  string buy_price = 5;  // BigDecimal as string
+  int64 remaining_quantity = 6;
+  google.protobuf.Timestamp timestamp = 7;
+  string realized_pnl = 8;  // BigDecimal as string
+  google.protobuf.Timestamp created_at = 9;
+  google.protobuf.Timestamp updated_at = 10;
+}
+
+// Position message
+message Position {
+  string portfolio_id = 1;  // UUID as string
+  string symbol = 2;
+  int64 holdings = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+// Risk message
+message Risk {
+  string portfolio_id = 1;  // UUID as string
+  string sharp_ratio = 2;  // BigDecimal as string
+  string sortino_ratio = 3;  // BigDecimal as string
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+// Sector Analysis message
+message SectorAnalysis {
+  string portfolio_id = 1;  // UUID as string
+  string sector_name = 2;
+  string invested_price = 3;  // BigDecimal as string
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+// Analytics envelope with metadata
+message AnalyticsEnvelope {
+  oneof analytics_data {
+    Pnl pnl = 1;
+    Position position = 2;
+    Risk risk = 3;
+    SectorAnalysis sector_analysis = 4;
+  }
+  string trace_id = 5;
+  google.protobuf.Timestamp event_timestamp = 6;
+}

@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package pms.core;
+
+option java_package = "com.pms.proto.core";
+option java_outer_classname = "CoreProto";
+
+import "google/protobuf/timestamp.proto";
+
+// Trade Side enumeration
+enum TradeSide {
+  BUY = 0;
+  SELL = 1;
+}
+
+// Trade message
+message Trade {
+  string trade_id = 1;  // UUID as string
+  string portfolio_id = 2;  // UUID as string
+  string symbol = 3;
+  TradeSide side = 4;
+  string price_per_stock = 5;  // BigDecimal as string
+  int64 quantity = 6;
+  google.protobuf.Timestamp timestamp = 7;
+}
+
+// Transaction message
+message Transaction {
+  string transaction_id = 1;  // UUID as string
+  string trade_id = 2;  // UUID as string
+  string buy_price = 3;  // BigDecimal as string
+  string sell_price = 4;  // BigDecimal as string
+  int64 quantity = 5;
+  int64 remaining_quantity = 6;
+}
+
+// Trade envelope with metadata
+message TradeEnvelope {
+  Trade trade = 1;
+  string trace_id = 2;  // UUID as string
+  google.protobuf.Timestamp event_timestamp = 3;
+}

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package pms.snapshot;
+
+option java_package = "com.pms.proto.snapshot";
+option java_outer_classname = "SnapshotProto";
+
+import "google/protobuf/timestamp.proto";
+
+// Market Snapshot message
+message MarketSnapshot {
+  string snapshot_id = 1;
+  google.protobuf.Timestamp ts = 2;
+  string prices = 3;  // JSON string with symbol-price map
+}
+
+// Snapshot envelope with metadata
+message SnapshotEnvelope {
+  MarketSnapshot snapshot = 1;
+  string trace_id = 2;
+  google.protobuf.Timestamp event_timestamp = 3;
+}

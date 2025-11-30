@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package pms.simulator;
+
+option java_package = "com.pms.proto.simulator";
+option java_outer_classname = "SimulatorProto";
+
+import "google/protobuf/timestamp.proto";
+
+// Simulated Trade message
+message SimulatedTrade {
+  string portfolio_id = 1;  // UUID as string
+  string trade_id = 2;  // UUID as string
+  string symbol = 3;
+  string side = 4;  // "buy" or "sell"
+  double price_per_stock = 5;
+  int64 quantity = 6;
+  google.protobuf.Timestamp timestamp = 7;
+}
+
+// Simulator envelope with metadata
+message SimulatorEnvelope {
+  SimulatedTrade simulated_trade = 1;
+  string trace_id = 2;
+  google.protobuf.Timestamp event_timestamp = 3;
+}

@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package pms.crossref;
+
+option java_package = "com.pms.proto.crossref";
+option java_outer_classname = "CrossrefProto";
+
+import "google/protobuf/timestamp.proto";
+
+// Lifecycle Event message
+message LifecycleEvent {
+  string trace_id = 1;  // UUID as string
+  string x_ref = 2;  // External trade ID
+  string portfolio_id = 3;
+  string stage = 4;  // Processing stage
+  string status = 5;  // SUCCESS/FAILURE
+  google.protobuf.Timestamp ts = 6;
+  string details = 7;  // JSON string with metadata
+}
+
+// Crossref envelope with metadata
+message CrossrefEnvelope {
+  LifecycleEvent lifecycle_event = 1;
+  google.protobuf.Timestamp event_timestamp = 2;
+}
